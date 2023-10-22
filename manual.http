@@ -1,0 +1,192 @@
+### Register
+POST http://localhost:8080/api/users
+Accept: application/json
+Content-Type: application/json
+
+{
+  "email": "jeje@gmail.com",
+  "password": "1111",
+  "name": "Jeje",
+  "phoneNumber": "08123456789"
+}
+
+
+### Send Email Verification
+GET http://localhost:8080/api/users/send-verification?email=joni@gmail.com
+
+### Verify Email
+GET http://localhost:8080/api/users/verify?email=joni@gmail.com&token=924cc881-412b-4f80-8322-e67bbae57342
+
+### Login
+POST http://localhost:8080/api/auth/login
+Accept: application/json
+Content-Type: application/json
+
+{
+  "email": "joni@gmail.com",
+  "password": "1111"
+}
+
+### Refresh token
+GET http://localhost:8080/api/auth/refresh-token
+Accept: application/json
+X-API-TOKEN: 8256e067-1f10-4fde-bb27-d3a78a93485d
+
+### Logout
+DELETE http://localhost:8080/api/auth/logout
+Accept: application/json
+X-API-TOKEN: 94399073-2911-4efb-88b8-b40e229ef7c9
+
+### Change Password
+PATCH http://localhost:8080/api/auth/change-password
+Accept: application/json
+Content-Type: application/json
+X-API-TOKEN: 9cfe3b54-0529-49f1-af21-3c99c60ef05a
+
+{
+  "oldPassword": "1111",
+  "newPassword": "2222"
+}
+
+### Get User
+GET http://localhost:8080/api/users/current
+Accept: application/json
+X-API-TOKEN: 9cfe3b54-0529-49f1-af21-3c99c60ef05a
+
+
+### Update Credit Card Info
+PUT http://localhost:8080/api/users/card-info
+Accept: application/json
+Content-Type: application/json
+X-API-TOKEN: 553e9055-b216-40e4-9a68-f329624df7d7
+
+{
+  "cardName": "Joni",
+  "cardNumber": "1234567890123456",
+  "cardExpired": "11/26",
+  "cardCvv": "123"
+}
+
+### Get User Status with Email
+GET http://localhost:8080/api/users/status?email=joni@gmail.com
+Accept: application/json
+
+### Update User
+PATCH http://localhost:8080/api/users/current
+Accept: application/json
+Content-Type: application/json
+X-API-TOKEN: 9cfe3b54-0529-49f1-af21-3c99c60ef05a
+
+{
+  "name": "Joni Iskandar"
+}
+
+
+### Create Service Menu
+POST http://localhost:8080/api/service-menu
+Accept: application/json
+Content-Type: application/json
+
+{
+  "name": "Bulking Program",
+  "description": "Membentuk otot dan menaikan berat badan",
+  "pricePerSession": 90000,
+  "totalSessions": 16,
+  "durationInMinutes": 100,
+  "schedule": "Rabu, Jumat, Sabtu, Minggu"
+}
+
+### Get Service Menu
+GET http://localhost:8080/api/service-menu?id=1
+
+### Get All Service Menu
+GET http://localhost:8080/api/service-menu/all
+
+### Create Exercise
+POST http://localhost:8080/api/exercise
+Accept: application/json
+Content-Type: application/json
+
+{
+  "name": "Lateral Raise",
+  "description": "Membentuk otot bahu",
+  "durationInMinutes": 15,
+  "serviceMenuId": 1
+}
+
+### Get Exercise by Service Menu Id
+GET http://localhost:8080/api/exercise?serviceMenuId=1
+
+### Subsciption Service
+POST http://localhost:8080/api/subscription/subscribe
+Accept: application/json
+Content-Type: application/json
+X-API-TOKEN: 553e9055-b216-40e4-9a68-f329624df7d7
+
+{
+  "serviceMenuId": 1,
+  "startDate": "2023-10-01",
+  "endDate": "2023-12-31"
+}
+
+### Payment request
+POST http://localhost:8080/api/payment/request
+Accept: application/json
+Content-Type: application/json
+X-API-TOKEN: 553e9055-b216-40e4-9a68-f329624df7d7
+
+{
+  "serviceMenuId": 12,
+  "subscriptionId": 2
+}
+
+### Extend Subscription
+PATCH http://localhost:8080/api/subscription/extend
+Accept: application/json
+Content-Type: application/json
+X-API-TOKEN: 553e9055-b216-40e4-9a68-f329624df7d7
+
+{
+  "serviceMenuId": 1,
+  "endDate": "2024-02-01"
+}
+
+### Cancel Subscription
+DELETE http://localhost:8080/api/subscription/cancel
+Accept: application/json
+Content-Type: application/json
+X-API-TOKEN: 553e9055-b216-40e4-9a68-f329624df7d7
+
+{
+  "serviceMenuId": 1
+}
+
+
+### Payment confirmation
+PATCH http://localhost:8080/api/payment/confirm
+Accept: application/json
+Content-Type: application/json
+X-API-TOKEN: 2194b67f-6b5e-4061-a510-a620bcd8b406
+
+{
+  "paymentId": "8e365f11-b8b5-46d8-83a6-d5286e8c45b8",
+  "serviceMenuId": 10,
+  "subscriptionId": 2,
+  "otpCode": "123456"
+}
+
+
+### Send OTP Code
+GET http://localhost:8080/api/payment/send-otp?paymentId=8e365f11-b8b5-46d8-83a6-d5286e8c45b8
+Accept: application/json
+Content-Type: application/json
+X-API-TOKEN: 2194b67f-6b5e-4061-a510-a620bcd8b406
+
+### Get Payment Status
+GET http://localhost:8080/api/payment/status?paymentId=8e365f11-b8b5-46d8-83a6-d5286e8c45b8
+Accept: application/json
+Content-Type: application/json
+X-API-TOKEN: 2194b67f-6b5e-4061-a510-a620bcd8b406
+
+
+
